@@ -1,6 +1,6 @@
 package com.roman.user.shared.infrastructure;
 
-import com.roman.shared.infrastructure.HibernateConfigurationFactory;
+import com.roman.shared.infrastructure.hibernate.HibernateConfigurationFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;

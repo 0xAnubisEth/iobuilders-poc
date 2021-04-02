@@ -1,4 +1,4 @@
-package com.roman.shared.infrastructure;
+package com.roman.shared.infrastructure.hibernate;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.cfg.AvailableSettings;

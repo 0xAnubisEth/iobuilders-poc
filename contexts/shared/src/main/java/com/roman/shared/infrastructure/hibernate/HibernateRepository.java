@@ -1,4 +1,4 @@
-package com.roman.shared.infrastructure;
+package com.roman.shared.infrastructure.hibernate;
 
 import com.roman.shared.domain.Identifier;
 import org.hibernate.SessionFactory;

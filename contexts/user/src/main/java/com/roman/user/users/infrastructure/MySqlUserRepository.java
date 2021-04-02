@@ -1,6 +1,6 @@
 package com.roman.user.users.infrastructure;
 
-import com.roman.shared.infrastructure.HibernateRepository;
+import com.roman.shared.infrastructure.hibernate.HibernateRepository;
 import com.roman.user.users.domain.User;
 import com.roman.user.users.domain.UserRepository;
 import org.hibernate.SessionFactory;
