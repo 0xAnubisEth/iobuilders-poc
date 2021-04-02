@@ -6,4 +6,8 @@ public class UserPassword extends StringValueObject {
     public UserPassword(String value) {
         super(value);
     }
+
+    public UserPassword() {
+        super("");
+    }
 }

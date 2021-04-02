@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class HibernateConfigurationFactory {
 
     private List<String> subdirectoriesFor(String contextName) {
-        String path = "./contexts/" + contextName + "src/main/java/com/roman/" + contextName + "/";
+        String path = "./contexts/" + contextName + "/src/main/java/com/roman/" + contextName + "/";
 
         String[] files = new File(path).list((current, name) -> new File(current, name).isDirectory());
 
@@ -98,7 +98,7 @@ public class HibernateConfigurationFactory {
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put(AvailableSettings.HBM2DDL_AUTO, "none");
-        hibernateProperties.put(AvailableSettings.SHOW_SQL, "false");
+        hibernateProperties.put(AvailableSettings.SHOW_SQL, "true");
         hibernateProperties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 
         return hibernateProperties;
