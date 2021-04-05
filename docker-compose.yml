@@ -9,7 +9,18 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    command: ["--default-authentication-plugin=mysql_native_password"]
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
     volumes:
       - "./scripts/user.sql:/docker-entrypoint-initdb.d/1.sql"
       - "./scripts/wallet.sql:/docker-entrypoint-initdb.d/2.sql"
+
+  rabbitmq:
+    container_name: roman_iobuilder-poc_rabbitmq
+    image: 'rabbitmq:3.7-management'
+    restart: unless-stopped
+    ports:
+      - 5630:5672
+      - 8090:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=iobuilders
+      - RABBITMQ_DEFAULT_PASS=i0build3rs

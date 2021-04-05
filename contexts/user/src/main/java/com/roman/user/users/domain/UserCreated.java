@@ -10,6 +10,14 @@ public final class UserCreated extends DomainEvent {
     private final String username;
     private final String password;
 
+    public UserCreated() {
+        super(null);
+
+        this.id = null;
+        this.username = null;
+        this.password = null;
+    }
+
     public UserCreated(String id, String username, String password) {
         super(null);
 
