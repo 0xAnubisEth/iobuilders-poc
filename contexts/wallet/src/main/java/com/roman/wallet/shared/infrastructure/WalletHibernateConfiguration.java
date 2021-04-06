@@ -1,4 +1,4 @@
-package com.roman.user.shared.infrastructure;
+package com.roman.wallet.shared.infrastructure;
 
 import com.roman.shared.infrastructure.hibernate.HibernateConfigurationFactory;
 import org.springframework.context.annotation.Bean;
@@ -13,34 +13,33 @@ import java.util.Objects;
 
 @Configuration
 @EnableTransactionManagement
-public class UserHibernateConfiguration {
-
+public class WalletHibernateConfiguration {
     private final HibernateConfigurationFactory factory;
     private final Environment environment;
 
-    public UserHibernateConfiguration(HibernateConfigurationFactory factory, Environment environment) {
+    public WalletHibernateConfiguration(HibernateConfigurationFactory factory, Environment environment) {
         this.factory = factory;
         this.environment = environment;
     }
 
-    @Bean("user-transaction_manager")
+    @Bean("wallet-transaction_manager")
     public PlatformTransactionManager hibernateTransactionManager() {
         return factory.hibernateTransactionManager(sessionFactory());
     }
 
-    @Bean("user-session_factory")
+    @Bean("wallet-session_factory")
     public LocalSessionFactoryBean sessionFactory() {
-        return factory.sessionFactory("user", dataSource());
+        return factory.sessionFactory("wallet", dataSource());
     }
 
-    @Bean("user-data_source")
+    @Bean("wallet-data_source")
     public DataSource dataSource() {
         return factory.dataSource(
-                environment.getProperty("user.database.host"),
-                Integer.valueOf(Objects.requireNonNull(environment.getProperty("user.database.port"))),
-                environment.getProperty("user.database.name"),
-                environment.getProperty("user.database.user"),
-                environment.getProperty("user.database.password")
+                environment.getProperty("wallet.database.host"),
+                Integer.valueOf(Objects.requireNonNull(environment.getProperty("wallet.database.port"))),
+                environment.getProperty("wallet.database.name"),
+                environment.getProperty("wallet.database.user"),
+                environment.getProperty("wallet.database.password")
         );
     }
 }
