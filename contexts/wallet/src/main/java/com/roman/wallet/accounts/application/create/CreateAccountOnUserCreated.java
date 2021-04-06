@@ -1,4 +1,4 @@
-package com.roman.wallet.accounts.application;
+package com.roman.wallet.accounts.application.create;
 
 import com.roman.shared.domain.bus.event.DomainEventSubscriber;
 import com.roman.shared.domain.user.UserCreatedDomainEvent;
