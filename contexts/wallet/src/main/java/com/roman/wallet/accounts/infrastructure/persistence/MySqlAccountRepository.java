@@ -1,4 +1,4 @@
-package com.roman.wallet.accounts.infrastructure;
+package com.roman.wallet.accounts.infrastructure.persistence;
 
 import com.roman.shared.infrastructure.hibernate.HibernateRepository;
 import com.roman.wallet.accounts.domain.Account;

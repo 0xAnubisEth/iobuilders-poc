@@ -1,4 +1,4 @@
-package com.roman.user.users.infrastructure;
+package com.roman.user.users.infrastructure.persistence;
 
 import com.roman.shared.infrastructure.hibernate.HibernateRepository;
 import com.roman.user.users.domain.User;

@@ -1,6 +1,7 @@
 package com.roman.user.users.domain;
 
 import com.roman.shared.domain.AggregateRoot;
+import com.roman.shared.domain.user.UserCreatedDomainEvent;
 
 public final class User extends AggregateRoot {
     private final UserId id;
@@ -25,9 +26,9 @@ public final class User extends AggregateRoot {
         UserLastName lastName = new UserLastName(lastname);
         User user = new User(userId, userUsername, userPassword, userName, lastName);
 
-        UserCreated userCreated = new UserCreated(userId.value(), userUsername.value(), userPassword.value(), userName.value(), lastName.value());
+        UserCreatedDomainEvent userCreatedDomainEvent = new UserCreatedDomainEvent(userId.value(), userUsername.value(), userPassword.value(), userName.value(), lastName.value());
 
-        user.record(userCreated);
+        user.record(userCreatedDomainEvent);
 
         return user;
     }
