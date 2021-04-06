@@ -3,6 +3,7 @@ package com.roman.wallet.accounts.application.search_by_user;
 import com.roman.shared.domain.bus.query.QueryHandler;
 import com.roman.wallet.accounts.application.AccountResponse;
 import com.roman.wallet.accounts.domain.Account;
+import com.roman.wallet.accounts.domain.AccountNotFoundError;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,6 +23,6 @@ public class SearchAccountByUserQueryHandler implements QueryHandler<SearchAccou
             Account account = optional.get();
             return new AccountResponse(account.id().value(), account.userId().value(), account.balance().value());
         }
-        return null;
+        throw new AccountNotFoundError(String.format("The account with userId <%s> not exists", query.userId()));
     }
 }
