@@ -1,8 +1,8 @@
-package com.roman.wallet.accounts.application.search_by_user;
+package com.roman.wallet.accounts.application.search_by_id;
 
 import com.roman.wallet.accounts.domain.Account;
+import com.roman.wallet.accounts.domain.AccountId;
 import com.roman.wallet.accounts.domain.AccountRepository;
-import com.roman.wallet.accounts.domain.AccountUserId;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,7 +15,8 @@ public final class AccountFinder {
         this.repository = repository;
     }
 
-    public Optional<Account> find(String userId) {
-        return repository.findByUserId(new AccountUserId(userId));
+    public Optional<Account> find(String id) {
+        return repository.findById(new AccountId(id));
     }
+
 }

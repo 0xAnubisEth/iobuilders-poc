@@ -1,4 +1,4 @@
-package com.roman.wallet.accounts.application.search_by_user;
+package com.roman.wallet.accounts.application;
 
 import com.roman.shared.domain.bus.query.Response;
 

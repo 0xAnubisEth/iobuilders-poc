@@ -3,7 +3,7 @@ package com.roman.wallet.transactions.application.deposit;
 import com.roman.shared.domain.bus.event.EventBus;
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
-import com.roman.wallet.accounts.application.search_by_user.AccountResponse;
+import com.roman.wallet.accounts.application.AccountResponse;
 import com.roman.wallet.accounts.application.search_by_user.SearchAccountByUserQuery;
 import com.roman.wallet.transactions.domain.DepositTransactionDomainEvent;
 import com.roman.wallet.transactions.domain.Transaction;
