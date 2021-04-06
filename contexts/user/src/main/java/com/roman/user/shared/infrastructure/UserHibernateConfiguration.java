@@ -9,7 +9,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.util.Objects;
 
 @Configuration
 @EnableTransactionManagement
@@ -36,11 +35,11 @@ public class UserHibernateConfiguration {
     @Bean("user-data_source")
     public DataSource dataSource() {
         return factory.dataSource(
-                environment.getProperty("user.database.host"),
-                Integer.valueOf(Objects.requireNonNull(environment.getProperty("user.database.port"))),
-                environment.getProperty("user.database.name"),
-                environment.getProperty("user.database.user"),
-                environment.getProperty("user.database.password")
+                environment.getRequiredProperty("user.database.host"),
+                Integer.valueOf(environment.getRequiredProperty("user.database.port")),
+                environment.getRequiredProperty("user.database.name"),
+                environment.getRequiredProperty("user.database.user"),
+                environment.getRequiredProperty("user.database.password")
         );
     }
 }

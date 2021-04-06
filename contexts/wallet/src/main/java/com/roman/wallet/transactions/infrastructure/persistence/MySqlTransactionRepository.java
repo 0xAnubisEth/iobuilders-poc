@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 @Transactional("wallet-transaction_manager")
 public class MySqlTransactionRepository extends HibernateRepository<Transaction> implements TransactionRepository {
-    public MySqlTransactionRepository(SessionFactory sessionFactory, Class<Transaction> aggregateClass) {
-        super(sessionFactory, aggregateClass);
+    public MySqlTransactionRepository(SessionFactory sessionFactory) {
+        super(sessionFactory, Transaction.class);
     }
 
     @Override

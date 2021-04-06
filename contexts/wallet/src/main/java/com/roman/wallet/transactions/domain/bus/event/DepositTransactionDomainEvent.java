@@ -13,6 +13,15 @@ public class DepositTransactionDomainEvent extends DomainEvent {
     private final String type;
     private final String concept;
 
+    public DepositTransactionDomainEvent() {
+        this.id = null;
+        this.origin = null;
+        this.destination = null;
+        this.quantity = null;
+        this.type = null;
+        this.concept = null;
+    }
+
     public DepositTransactionDomainEvent(String id, String origin, String destination, Float quantity, String type, String concept) {
         super(null);
 

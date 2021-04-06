@@ -11,6 +11,12 @@ public class AccountCreated extends DomainEvent {
     private final String userId;
     private final Float balance;
 
+    public AccountCreated() {
+        this.id = null;
+        this.userId = null;
+        this.balance = null;
+    }
+
     public AccountCreated(String id, String userId, Float balance) {
         super(null);
 

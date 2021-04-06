@@ -7,14 +7,12 @@ public final class WithdrawTransactionCommand implements Command {
     private final String userId;
     private final Float quantity;
     private final String concept;
-    private final String destination;
 
-    public WithdrawTransactionCommand(String id, String userId, Float quantity, String concept, String destination) {
+    public WithdrawTransactionCommand(String id, String userId, Float quantity, String concept) {
         this.id = id;
         this.userId = userId;
         this.quantity = quantity;
         this.concept = concept;
-        this.destination = destination;
     }
 
     public String id() {
@@ -31,9 +29,5 @@ public final class WithdrawTransactionCommand implements Command {
 
     public String concept() {
         return concept;
-    }
-
-    public String destination() {
-        return destination;
     }
 }

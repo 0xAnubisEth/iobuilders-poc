@@ -1,11 +1,11 @@
-package com.roman.user.backend.controller;
+package com.roman.wallet.backend.controller;
 
 import com.roman.shared.domain.DomainError;
 import com.roman.shared.domain.bus.command.CommandBus;
 import com.roman.shared.domain.bus.command.CommandHandlerExecutionError;
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.infrastructure.spring.ApiController;
-import com.roman.user.users.application.CreateUserCommand;
+import com.roman.wallet.transactions.application.withdraw.WithdrawTransactionCommand;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +16,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
-public class CreateUserPostController extends ApiController {
+public class WithdrawPostController extends ApiController {
 
-    public CreateUserPostController(QueryBus queryBus, CommandBus commandBus) {
+    public WithdrawPostController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }
 
@@ -27,40 +27,30 @@ public class CreateUserPostController extends ApiController {
         return null;
     }
 
-    @PostMapping("/users")
+    @PostMapping("/wallet/withdraw")
     public ResponseEntity<String> index(@RequestBody Body body) throws CommandHandlerExecutionError {
         String id = UUID.randomUUID().toString();
-        dispatch(new CreateUserCommand(id, body.username(), body.password(), body.name(), body.lastname()));
+        // TODO: Delete userId var and add auth module
+        String userId = "312312312";
+        dispatch(new WithdrawTransactionCommand(id, userId, body.quantity(), body.concept()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     private static class Body {
-        private final String username;
-        private final String password;
-        private final String name;
-        private final String lastname;
+        private final Float quantity;
+        private final String concept;
 
-        public Body(String username, String password, String name, String lastname) {
-            this.username = username;
-            this.password = password;
-            this.name = name;
-            this.lastname = lastname;
+        public Body(Float quantity, String concept) {
+            this.quantity = quantity;
+            this.concept = concept;
         }
 
-        public String name() {
-            return name;
+        public Float quantity() {
+            return quantity;
         }
 
-        public String lastname() {
-            return lastname;
-        }
-
-        public String username() {
-            return username;
-        }
-
-        public String password() {
-            return password;
+        public String concept() {
+            return concept;
         }
     }
 }

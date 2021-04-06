@@ -10,7 +10,7 @@
         </composite-id>
 
         <component name="userId" class="com.roman.wallet.accounts.domain.AccountUserId" access="field">
-            <property name="value" column="userId" type="string" access="field"/>
+            <property name="value" column="user_id" type="string" access="field"/>
         </component>
 
         <component name="balance" class="com.roman.wallet.accounts.domain.AccountBalance" access="field">

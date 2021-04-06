@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional("wallet-transaction_manager")
 public class MySqlUserRepository extends HibernateRepository<WalletUser> implements WalletUserRepository {
-    public MySqlUserRepository(SessionFactory sessionFactory, Class<WalletUser> aggregateClass) {
-        super(sessionFactory, aggregateClass);
+    public MySqlUserRepository(SessionFactory sessionFactory) {
+        super(sessionFactory, WalletUser.class);
     }
 
     @Override

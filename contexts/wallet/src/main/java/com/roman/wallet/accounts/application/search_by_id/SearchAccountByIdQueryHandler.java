@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Service
 public final class SearchAccountByIdQueryHandler implements QueryHandler<SearchAccountByIdQuery, AccountResponse> {
-    private final AccountFinder finder;
+    private final AccountFinderById finder;
 
-    public SearchAccountByIdQueryHandler(AccountFinder finder) {
+    public SearchAccountByIdQueryHandler(AccountFinderById finder) {
         this.finder = finder;
     }
 

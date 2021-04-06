@@ -35,11 +35,11 @@ public class WalletHibernateConfiguration {
     @Bean("wallet-data_source")
     public DataSource dataSource() {
         return factory.dataSource(
-                environment.getProperty("wallet.database.host"),
-                Integer.valueOf(Objects.requireNonNull(environment.getProperty("wallet.database.port"))),
-                environment.getProperty("wallet.database.name"),
-                environment.getProperty("wallet.database.user"),
-                environment.getProperty("wallet.database.password")
+                environment.getRequiredProperty("wallet.database.host"),
+                Integer.valueOf(Objects.requireNonNull(environment.getRequiredProperty("wallet.database.port"))),
+                environment.getRequiredProperty("wallet.database.name"),
+                environment.getRequiredProperty("wallet.database.user"),
+                environment.getRequiredProperty("wallet.database.password")
         );
     }
 }

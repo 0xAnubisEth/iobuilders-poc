@@ -1,4 +1,4 @@
-package com.roman.walletbackend;
+package com.roman.wallet.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

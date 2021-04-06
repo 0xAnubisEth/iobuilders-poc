@@ -3,7 +3,9 @@ package com.roman.wallet.accounts.application.create;
 import com.roman.shared.domain.bus.event.EventBus;
 import com.roman.wallet.accounts.domain.Account;
 import com.roman.wallet.accounts.domain.AccountRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountCreator {
     private final AccountRepository repository;
     private final EventBus eventBus;

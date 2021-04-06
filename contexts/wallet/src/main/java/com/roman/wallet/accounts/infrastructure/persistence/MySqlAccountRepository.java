@@ -17,8 +17,8 @@ import java.util.Optional;
 @Service
 @Transactional("wallet-transaction_manager")
 public class MySqlAccountRepository extends HibernateRepository<Account> implements AccountRepository {
-    public MySqlAccountRepository(SessionFactory sessionFactory, Class<Account> aggregateClass) {
-        super(sessionFactory, aggregateClass);
+    public MySqlAccountRepository(SessionFactory sessionFactory) {
+        super(sessionFactory, Account.class);
     }
 
     @Override

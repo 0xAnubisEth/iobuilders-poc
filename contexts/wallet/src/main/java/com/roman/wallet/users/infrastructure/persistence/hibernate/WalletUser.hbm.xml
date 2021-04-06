@@ -8,6 +8,6 @@
         <id name="id" column="id" length="36" access="field"/>
         <property name="username" column="username" type="string" access="field"/>
         <property name="name" column="name" type="string" access="field"/>
-        <property name="lastname" column="name" type="string" access="field"/>
+        <property name="lastname" column="lastname" type="string" access="field"/>
     </class>
 </hibernate-mapping>

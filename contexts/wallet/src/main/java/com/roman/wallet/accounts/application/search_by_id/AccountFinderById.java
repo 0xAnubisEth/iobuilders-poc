@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public final class AccountFinder {
+public final class AccountFinderById {
     private final AccountRepository repository;
 
-    public AccountFinder(AccountRepository repository) {
+    public AccountFinderById(AccountRepository repository) {
         this.repository = repository;
     }
 

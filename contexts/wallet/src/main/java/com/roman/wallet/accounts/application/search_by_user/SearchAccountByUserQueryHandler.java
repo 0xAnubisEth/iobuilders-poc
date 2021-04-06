@@ -10,15 +10,15 @@ import java.util.Optional;
 
 @Service
 public class SearchAccountByUserQueryHandler implements QueryHandler<SearchAccountByUserQuery, AccountResponse> {
-    private final AccountFinder accountFinder;
+    private final AccountFinderByUserId accountFinderByUserId;
 
-    public SearchAccountByUserQueryHandler(AccountFinder accountFinder) {
-        this.accountFinder = accountFinder;
+    public SearchAccountByUserQueryHandler(AccountFinderByUserId accountFinderByUserId) {
+        this.accountFinderByUserId = accountFinderByUserId;
     }
 
     @Override
     public AccountResponse handle(SearchAccountByUserQuery query) {
-        Optional<Account> optional = accountFinder.find(query.userId());
+        Optional<Account> optional = accountFinderByUserId.find(query.userId());
         if (optional.isPresent()) {
             Account account = optional.get();
             return new AccountResponse(account.id().value(), account.userId().value(), account.balance().value());
