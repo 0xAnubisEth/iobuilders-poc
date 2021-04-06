@@ -30,17 +30,29 @@ public class CreateUserPostController extends ApiController {
     @PostMapping("/users")
     public ResponseEntity<String> index(@RequestBody Body body) throws CommandHandlerExecutionError {
         String id = UUID.randomUUID().toString();
-        dispatch(new CreateUserCommand(id, body.username(), body.password()));
+        dispatch(new CreateUserCommand(id, body.username(), body.password(), body.name(), body.lastname()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     static class Body {
         private final String username;
         private final String password;
+        private final String name;
+        private final String lastname;
 
-        public Body(String username, String password) {
+        public Body(String username, String password, String name, String lastname) {
             this.username = username;
             this.password = password;
+            this.name = name;
+            this.lastname = lastname;
+        }
+
+        public String name() {
+            return name;
+        }
+
+        public String lastname() {
+            return lastname;
         }
 
         public String username() {

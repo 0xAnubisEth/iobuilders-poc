@@ -13,6 +13,6 @@ public class CreateUserCommandHandler implements CommandHandler<CreateUserComman
 
     @Override
     public void handle(CreateUserCommand command) {
-        this.creator.create(command.id(), command.username(), command.password());
+        this.creator.create(command.id(), command.username(), command.password(), command.name(), command.lastname());
     }
 }

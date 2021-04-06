@@ -15,8 +15,8 @@ public class UserCreator {
         this.eventBus = eventBus;
     }
 
-    void create(String id, String username, String password) {
-        User user = User.create(id, username, password);
+    void create(String id, String username, String password, String name, String lastname) {
+        User user = User.create(id, username, password, name, lastname);
 
         repository.save(user);
 
