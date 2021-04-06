@@ -31,14 +31,18 @@ public final class TransactionTransfer {
         // Search destination account
         AccountResponse destinationResponse = queryBus.ask(new SearchAccountByIdQuery(destination));
 
-        // Save transaction
-        Transaction transaction = Transaction.create(id, originResponse.id(), destinationResponse.id(), quantity, TRANSACTION_TYPE, concept);
-        repository.save(transaction);
+        // Save destination transaction
+        Transaction destinationTransaction = Transaction.create(id, originResponse.id(), destinationResponse.id(), quantity, TRANSACTION_TYPE, concept);
+        repository.save(destinationTransaction);
+
+        // Save origin transaction
+        Transaction originTransaction = Transaction.create(id, originResponse.id(), originResponse.id(), -quantity, TRANSACTION_TYPE, String.format("Transfer ID: <%s> - Destination account ID: <%s>", id, destination));
+        repository.save(originTransaction);
 
         // Save event
-        transaction.recordEvent(new TransferTransactionDomainEvent(id, originResponse.id(), destinationResponse.id(), quantity, TRANSACTION_TYPE, concept));
+        destinationTransaction.recordEvent(new TransferTransactionDomainEvent(id, originResponse.id(), destinationResponse.id(), quantity, TRANSACTION_TYPE, concept));
 
         // Publish event
-        eventBus.publish(transaction.pullDomainEvents());
+        eventBus.publish(destinationTransaction.pullDomainEvents());
     }
 }
