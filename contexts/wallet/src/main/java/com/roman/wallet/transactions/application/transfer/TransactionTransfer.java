@@ -8,7 +8,7 @@ import com.roman.wallet.accounts.application.search_by_id.SearchAccountByIdQuery
 import com.roman.wallet.accounts.application.search_by_user.SearchAccountByUserQuery;
 import com.roman.wallet.transactions.domain.Transaction;
 import com.roman.wallet.transactions.domain.TransactionRepository;
-import com.roman.wallet.transactions.domain.TransferTransactionDomainEvent;
+import com.roman.wallet.transactions.domain.bus.event.TransferTransactionDomainEvent;
 import org.springframework.stereotype.Service;
 
 @Service

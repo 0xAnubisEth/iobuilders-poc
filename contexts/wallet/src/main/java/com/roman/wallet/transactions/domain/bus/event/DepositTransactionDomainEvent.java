@@ -1,4 +1,4 @@
-package com.roman.wallet.transactions.domain;
+package com.roman.wallet.transactions.domain.bus.event;
 
 import com.roman.shared.domain.bus.event.DomainEvent;
 

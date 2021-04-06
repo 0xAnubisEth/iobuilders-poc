@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public final class TransferTransactionCommandHandler implements CommandHandler<TransferTransactionCommand> {
-
-    private TransactionTransfer transfer;
+    private final TransactionTransfer transfer;
 
     public TransferTransactionCommandHandler(TransactionTransfer transfer) {
         this.transfer = transfer;
