@@ -6,4 +6,8 @@ public class AccountUserId extends Identifier {
     public AccountUserId(String value) {
         super(value);
     }
+
+    public AccountUserId() {
+        super("");
+    }
 }

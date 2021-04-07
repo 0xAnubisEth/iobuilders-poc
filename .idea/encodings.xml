@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/apps/user-backend/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/apps/wallet-backend/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/contexts/shared/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/contexts/user/src/main/java" charset="UTF-8" />
   </component>
 </project>

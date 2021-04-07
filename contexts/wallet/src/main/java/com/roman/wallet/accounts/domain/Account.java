@@ -7,6 +7,12 @@ public final class Account extends AggregateRoot {
     private final AccountUserId userId;
     private final AccountBalance balance;
 
+    public Account() {
+        this.id = null;
+        this.userId = null;
+        this.balance = null;
+    }
+
     public Account(AccountId id, AccountUserId userId, AccountBalance balance) {
         this.id = id;
         this.userId = userId;

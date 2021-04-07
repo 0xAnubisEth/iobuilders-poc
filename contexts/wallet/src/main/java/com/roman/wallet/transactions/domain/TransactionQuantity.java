@@ -6,4 +6,8 @@ public class TransactionQuantity extends FloatValueObject {
     public TransactionQuantity(Float value) {
         super(value);
     }
+
+    public TransactionQuantity() {
+        super((float) 0);
+    }
 }

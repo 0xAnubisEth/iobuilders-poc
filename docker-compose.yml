@@ -23,4 +23,12 @@ services:
       - 8090:15672
     environment:
       - RABBITMQ_DEFAULT_USER=iobuilders
-      - RABBITMQ_DEFAULT_PASS=i0build3rs
+      - RABBITMQ_DEFAULT_PASS=i0build3rsç
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: [ "redis-server", "/redis.conf" ]

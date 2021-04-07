@@ -11,6 +11,15 @@ public class Transaction extends AggregateRoot {
     private final TransactionType type;
     private final TransactionConcept concept;
 
+    public Transaction() {
+        this.id = null;
+        this.origin = null;
+        this.destination = null;
+        this.quantity = null;
+        this.type = null;
+        this.concept = null;
+    }
+
     public Transaction(TransactionId id, TransactionOrigin origin, TransactionDestination destination, TransactionQuantity quantity, TransactionType type, TransactionConcept concept) {
         this.id = id;
         this.origin = origin;

@@ -6,4 +6,8 @@ public class AccountBalance extends FloatValueObject {
     public AccountBalance(Float value) {
         super(value);
     }
+
+    public AccountBalance() {
+        super((float) 0);
+    }
 }

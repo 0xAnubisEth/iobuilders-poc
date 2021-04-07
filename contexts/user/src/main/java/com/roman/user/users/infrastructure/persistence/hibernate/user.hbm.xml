@@ -16,5 +16,13 @@
         <component name="password" class="com.roman.user.users.domain.UserPassword" access="field">
             <property name="value" column="password" type="string" access="field"/>
         </component>
+
+        <component name="name" class="com.roman.user.users.domain.UserName" access="field">
+            <property name="value" column="name" type="string" access="field"/>
+        </component>
+
+        <component name="lastName" class="com.roman.user.users.domain.UserLastName" access="field">
+            <property name="value" column="lastname" type="string" access="field"/>
+        </component>
     </class>
 </hibernate-mapping>

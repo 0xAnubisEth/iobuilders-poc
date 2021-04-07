@@ -6,4 +6,8 @@ public class TransactionConcept extends StringValueObject {
     public TransactionConcept(String value) {
         super(value);
     }
+
+    public TransactionConcept() {
+        super("");
+    }
 }

@@ -13,6 +13,13 @@ public final class WalletUser {
         this.lastname = lastname;
     }
 
+    public WalletUser() {
+        this.id = null;
+        this.username = null;
+        this.name = null;
+        this.lastname = null;
+    }
+
     public String id() {
         return id;
     }

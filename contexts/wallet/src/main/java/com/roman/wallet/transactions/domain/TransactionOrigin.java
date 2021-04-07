@@ -6,4 +6,8 @@ public class TransactionOrigin extends StringValueObject {
     public TransactionOrigin(String value) {
         super(value);
     }
+
+    public TransactionOrigin() {
+        super("");
+    }
 }

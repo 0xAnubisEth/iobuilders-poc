@@ -6,4 +6,8 @@ public class TransactionDestination extends StringValueObject {
     public TransactionDestination(String value) {
         super(value);
     }
+
+    public TransactionDestination() {
+        super("");
+    }
 }
