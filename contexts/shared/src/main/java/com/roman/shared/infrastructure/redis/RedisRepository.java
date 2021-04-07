@@ -1,6 +1,5 @@
 package com.roman.shared.infrastructure.redis;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
@@ -10,7 +9,7 @@ public abstract class RedisRepository<T> {
 
     private final RedisConnectionFactory factory;
 
-    public RedisRepository(@Qualifier("redis_connection") RedisConnectionFactory factory) {
+    public RedisRepository(RedisConnectionFactory factory) {
         this.factory = factory;
     }
 
@@ -27,8 +26,7 @@ public abstract class RedisRepository<T> {
     }
 
     public void save(String id, T impl) {
-        RedisTemplate<String, T> template = redisTemplate();
-        template.opsForValue().set(id, impl);
+        redisTemplate().opsForValue().set(id, impl);
     }
 
     public T findById(String id) {

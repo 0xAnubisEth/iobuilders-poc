@@ -4,8 +4,11 @@ import com.roman.shared.domain.DomainError;
 import com.roman.shared.domain.bus.command.CommandBus;
 import com.roman.shared.domain.bus.command.CommandHandlerExecutionError;
 import com.roman.shared.domain.bus.query.QueryBus;
+import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.roman.shared.infrastructure.spring.ApiController;
+import com.roman.user.auth.application.UserAuthResponse;
 import com.roman.user.auth.application.login.LoginAuthUserCommand;
+import com.roman.user.auth.application.search_by_username.SearchAuthUserByUsernameQuery;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +31,15 @@ public class LoginPostController extends ApiController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> index(@RequestBody Body body) throws CommandHandlerExecutionError {
+    public ResponseEntity<String> index(@RequestBody Body body) throws CommandHandlerExecutionError, QueryHandlerExecutionError {
         // Login
         dispatch(new LoginAuthUserCommand(body.username(), body.password()));
-        // TODO: Get token
-        String token = "";
+
+        // Get token
+        UserAuthResponse response = ask(new SearchAuthUserByUsernameQuery(body.username()));
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", token);
+        headers.add("Authorization", response.token());
         return ResponseEntity.ok().headers(headers).body("Ok");
     }
 
