@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -28,10 +29,9 @@ public class WithdrawPostController extends ApiController {
     }
 
     @PostMapping("/wallet/withdraw")
-    public ResponseEntity<String> index(@RequestBody Body body) throws CommandHandlerExecutionError {
+    public ResponseEntity<String> index(HttpServletRequest request, @RequestBody Body body) throws CommandHandlerExecutionError {
         String id = UUID.randomUUID().toString();
-        // TODO: Delete userId var and add auth module
-        String userId = "312312312";
+        String userId = request.getAttribute("authentication_user").toString();
         dispatch(new WithdrawTransactionCommand(id, userId, body.quantity(), body.concept()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

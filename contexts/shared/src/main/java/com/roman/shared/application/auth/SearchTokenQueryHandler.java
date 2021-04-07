@@ -16,6 +16,6 @@ public class SearchTokenQueryHandler implements QueryHandler<SearchTokenQuery, U
     @Override
     public UserAuthResponse handle(SearchTokenQuery query) throws QueryHandlerExecutionError {
         AuthUser user = finder.find(query.userId());
-        return new UserAuthResponse(user.userId, user.username, user.username);
+        return new UserAuthResponse(user.userId, user.username, user.token);
     }
 }

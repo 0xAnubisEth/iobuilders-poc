@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 @ComponentScan(
-        value = {"com.roman.shared", "com.roman.wallet"}
+        value = {"com.roman.shared", "com.roman.wallet", "com.roman.wallet.backend"}
 )
 public class WalletBackendApplication {
 

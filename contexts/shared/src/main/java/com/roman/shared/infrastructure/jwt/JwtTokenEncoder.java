@@ -5,10 +5,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -22,26 +22,34 @@ public class JwtTokenEncoder implements TokenEncoder {
 
     @Override
     public String encode(String id) {
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
+        String secretToken = env.getRequiredProperty("jwt.secret.key");
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         String signatureString = signatureAlgorithm.toString();
 
         HashMap<String, Object> header = new HashMap<>();
         header.put("alg", signatureString);
         header.put("typ", "JWT");
-        header.put("_id", id);
+
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("_id", id);
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, Integer.parseInt(env.getRequiredProperty("jwt.expiration.time")));
         JwtBuilder jwtBuilder = Jwts.builder()
-                .signWith(Keys.secretKeyFor(signatureAlgorithm))
+                .signWith(signatureAlgorithm, secretToken.getBytes(StandardCharsets.UTF_8))
                 .setExpiration(calendar.getTime())
+                .setClaims(claims)
                 .setHeader(header);
         return jwtBuilder.compact();
     }
 
     @Override
     public HashMap<String, Object> decode(String token) {
-        Claims claims = Jwts.parser().parseClaimsJws(token).getBody();
+        String secretToken = env.getRequiredProperty("jwt.secret.key");
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretToken.getBytes(StandardCharsets.UTF_8))
+                .parseClaimsJws(token)
+                .getBody();
         return new HashMap<>(claims);
     }
 }
