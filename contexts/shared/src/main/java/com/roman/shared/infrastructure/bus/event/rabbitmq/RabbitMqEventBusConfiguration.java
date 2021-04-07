@@ -24,8 +24,7 @@ public class RabbitMqEventBusConfiguration {
     public RabbitMqEventBusConfiguration(
             DomainEventSubscribersInformation domainEventSubscribersInformation,
             DomainEventsInformation domainEventsInformation,
-            Environment config
-    ) throws IllegalStateException {
+            Environment config) throws IllegalStateException {
         this.domainEventSubscribersInformation = domainEventSubscribersInformation;
         this.domainEventsInformation = domainEventsInformation;
         this.config = config;

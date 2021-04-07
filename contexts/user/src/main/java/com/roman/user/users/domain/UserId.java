@@ -6,4 +6,7 @@ public final class UserId extends Identifier {
     public UserId(String value) {
         super(value);
     }
+
+    public UserId() {
+    }
 }

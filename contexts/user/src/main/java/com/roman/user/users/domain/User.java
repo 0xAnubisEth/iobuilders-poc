@@ -10,6 +10,14 @@ public final class User extends AggregateRoot {
     private final UserName name;
     private final UserLastName lastName;
 
+    public User() {
+        this.id = null;
+        this.username = null;
+        this.password = null;
+        this.name = null;
+        this.lastName = null;
+    }
+
     public User(UserId id, UserUsername username, UserPassword password, UserName name, UserLastName lastName) {
         this.id = id;
         this.username = username;

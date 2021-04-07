@@ -14,7 +14,7 @@ public class RedisConfigurationFactory {
         this.env = env;
     }
 
-    @Bean
+    @Bean("redis_connection")
     public LettuceConnectionFactory redisConnectionFactory() {
         return new LettuceConnectionFactory(new RedisStandaloneConfiguration(env.getRequiredProperty("redis.host"), Integer.parseInt(env.getRequiredProperty("redis.port"))));
     }

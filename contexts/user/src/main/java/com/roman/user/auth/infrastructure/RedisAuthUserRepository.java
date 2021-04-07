@@ -15,7 +15,7 @@ public class RedisAuthUserRepository extends RedisRepository<AuthUser> implement
 
     @Override
     public void save(AuthUser user) {
-        save(user.token(), user);
+        save(user.token, user);
     }
 
     @Override
