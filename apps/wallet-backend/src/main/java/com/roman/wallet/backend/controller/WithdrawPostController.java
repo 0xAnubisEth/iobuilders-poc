@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/wallet")
 public class WithdrawPostController extends ApiController {
 
     public WithdrawPostController(QueryBus queryBus, CommandBus commandBus) {
@@ -28,7 +30,7 @@ public class WithdrawPostController extends ApiController {
         return null;
     }
 
-    @PostMapping("/wallet/withdraw")
+    @PostMapping("/withdraw")
     public ResponseEntity<String> index(HttpServletRequest request, @RequestBody Body body) throws CommandHandlerExecutionError {
         String id = UUID.randomUUID().toString();
         String userId = request.getAttribute("authentication_user").toString();

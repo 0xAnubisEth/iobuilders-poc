@@ -6,10 +6,13 @@ import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.roman.wallet.accounts.application.AccountResponse;
 import com.roman.wallet.accounts.application.search_by_id.SearchAccountByIdQuery;
 import com.roman.wallet.accounts.application.search_by_user.SearchAccountByUserQuery;
+import com.roman.wallet.transactions.domain.AccountHasNotBalance;
 import com.roman.wallet.transactions.domain.Transaction;
 import com.roman.wallet.transactions.domain.TransactionRepository;
 import com.roman.wallet.transactions.domain.bus.event.TransferTransactionDomainEvent;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public final class TransactionTransfer {
@@ -28,6 +31,10 @@ public final class TransactionTransfer {
         // Search origin account
         AccountResponse originResponse = queryBus.ask(new SearchAccountByUserQuery(userId));
 
+        if (originResponse.balance() < quantity) {
+            throw new AccountHasNotBalance(quantity);
+        }
+
         // Search destination account
         AccountResponse destinationResponse = queryBus.ask(new SearchAccountByIdQuery(destination));
 
@@ -36,7 +43,7 @@ public final class TransactionTransfer {
         repository.save(destinationTransaction);
 
         // Save origin transaction
-        Transaction originTransaction = Transaction.create(id, originResponse.id(), originResponse.id(), -quantity, TRANSACTION_TYPE, String.format("Transfer ID: <%s> - Destination account ID: <%s>", id, destination));
+        Transaction originTransaction = Transaction.create(UUID.randomUUID().toString(), originResponse.id(), originResponse.id(), -quantity, TRANSACTION_TYPE, String.format("Transfer ID: <%s> - Destination account ID: <%s>", id, destination));
         repository.save(originTransaction);
 
         // Save event
