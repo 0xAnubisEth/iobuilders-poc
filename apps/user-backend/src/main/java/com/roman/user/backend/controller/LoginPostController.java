@@ -6,7 +6,7 @@ import com.roman.shared.domain.bus.command.CommandHandlerExecutionError;
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.roman.shared.infrastructure.spring.ApiController;
-import com.roman.user.auth.application.UserAuthResponse;
+import com.roman.shared.application.auth.UserAuthResponse;
 import com.roman.user.auth.application.login.LoginAuthUserCommand;
 import com.roman.user.auth.application.search_by_username.SearchAuthUserByUsernameQuery;
 import org.springframework.http.HttpHeaders;

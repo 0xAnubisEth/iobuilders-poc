@@ -2,10 +2,10 @@ package com.roman.user.auth.application.login;
 
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
-import com.roman.user.auth.domain.AuthUser;
-import com.roman.user.auth.domain.AuthUserRepository;
+import com.roman.shared.domain.auth.AuthUser;
+import com.roman.shared.domain.auth.AuthUserRepository;
 import com.roman.user.shared.domain.PasswordEncoder;
-import com.roman.user.shared.domain.TokenEncoder;
+import com.roman.shared.domain.TokenEncoder;
 import com.roman.user.users.application.search_by_username.SearchByUsernameQuery;
 import com.roman.user.users.application.search_by_username.UserResponse;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class AuthUserLogger {
         }
 
         // Generate token
-        String token = tokenEncoder.encode(userResponse.username());
+        String token = tokenEncoder.encode(userResponse.userId());
 
         // Save auth user
         repository.save(new AuthUser(userResponse.userId(), userResponse.username(), token));

@@ -1,4 +1,4 @@
-package com.roman.user.auth.domain;
+package com.roman.shared.domain.auth;
 
 public interface AuthUserRepository {
     void save(AuthUser user);

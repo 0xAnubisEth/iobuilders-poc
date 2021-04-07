@@ -2,8 +2,8 @@ package com.roman.user.auth.application.search_by_username;
 
 import com.roman.shared.domain.bus.query.QueryHandler;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
-import com.roman.user.auth.application.UserAuthResponse;
-import com.roman.user.auth.domain.AuthUser;
+import com.roman.shared.application.auth.UserAuthResponse;
+import com.roman.shared.domain.auth.AuthUser;
 import org.springframework.stereotype.Service;
 
 @Service

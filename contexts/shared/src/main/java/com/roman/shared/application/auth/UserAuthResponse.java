@@ -1,4 +1,4 @@
-package com.roman.user.auth.application;
+package com.roman.shared.application.auth;
 
 import com.roman.shared.domain.bus.query.Response;
 

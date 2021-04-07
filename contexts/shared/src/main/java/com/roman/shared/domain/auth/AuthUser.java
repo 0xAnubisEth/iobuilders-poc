@@ -1,4 +1,4 @@
-package com.roman.user.auth.domain;
+package com.roman.shared.domain.auth;
 
 import java.io.Serializable;
 
