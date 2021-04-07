@@ -8,6 +8,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional("user-transaction_manager")
 public class MySqlUserRepository extends HibernateRepository<User> implements UserRepository {
@@ -18,5 +24,18 @@ public class MySqlUserRepository extends HibernateRepository<User> implements Us
     @Override
     public void save(User user) {
         persist(user);
+    }
+
+    @Override
+    public Optional<User> findOneByUsername(String username) {
+        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> userRoot = cq.from(User.class);
+        cq.where(cb.equal(userRoot.get("username"), username));
+        List<User> users = sessionFactory.getCurrentSession().createQuery(cq).getResultList();
+        if (users.size() > 0) {
+            return Optional.of(users.get(0));
+        }
+        return Optional.empty();
     }
 }

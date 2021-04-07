@@ -1,4 +1,4 @@
-package com.roman.user.users.application;
+package com.roman.user.users.application.create;
 
 import com.roman.shared.domain.bus.command.Command;
 

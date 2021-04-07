@@ -7,14 +7,14 @@ public final class User extends AggregateRoot {
     private final UserId id;
     private final UserUsername username;
     private final UserPassword password;
-    private final UserName userName;
+    private final UserName name;
     private final UserLastName lastName;
 
-    public User(UserId id, UserUsername username, UserPassword password, UserName userName, UserLastName lastName) {
+    public User(UserId id, UserUsername username, UserPassword password, UserName name, UserLastName lastName) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.userName = userName;
+        this.name = name;
         this.lastName = lastName;
     }
 
@@ -33,8 +33,8 @@ public final class User extends AggregateRoot {
         return user;
     }
 
-    public UserName userName() {
-        return userName;
+    public UserName name() {
+        return name;
     }
 
     public UserLastName lastName() {
