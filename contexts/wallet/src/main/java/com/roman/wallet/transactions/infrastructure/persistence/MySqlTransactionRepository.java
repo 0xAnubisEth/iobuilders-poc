@@ -2,6 +2,7 @@ package com.roman.wallet.transactions.infrastructure.persistence;
 
 import com.roman.shared.infrastructure.hibernate.HibernateRepository;
 import com.roman.wallet.transactions.domain.Transaction;
+import com.roman.wallet.transactions.domain.TransactionAccountId;
 import com.roman.wallet.transactions.domain.TransactionRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class MySqlTransactionRepository extends HibernateRepository<Transaction>
     }
 
     @Override
-    public List<Transaction> getAll(String accountId) {
+    public List<Transaction> getAll(TransactionAccountId accountId) {
         CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Transaction> cq = cb.createQuery(Transaction.class);
         Root<Transaction> transactionRoot = cq.from(Transaction.class);

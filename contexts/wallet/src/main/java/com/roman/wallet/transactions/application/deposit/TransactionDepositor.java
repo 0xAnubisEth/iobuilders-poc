@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public final class TransactionDepositor {
-    private final String TRANSACTION_TYPE = "DEPOSIT";
+    private final String TRANSACTION_TYPE = "Deposit";
     private final TransactionRepository repository;
     private final EventBus eventBus;
     private final QueryBus queryBus;
