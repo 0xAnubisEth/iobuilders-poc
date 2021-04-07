@@ -4,6 +4,7 @@ import com.roman.shared.domain.Identifier;
 import com.roman.shared.infrastructure.hibernate.HibernateRepository;
 import com.roman.wallet.accounts.domain.Account;
 import com.roman.wallet.accounts.domain.AccountRepository;
+import com.roman.wallet.accounts.domain.AccountUserId;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +28,11 @@ public class MySqlAccountRepository extends HibernateRepository<Account> impleme
     }
 
     @Override
-    public Optional<Account> findByUserId(Identifier userId) {
+    public Optional<Account> findByUserId(AccountUserId userId) {
         CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Account> cq = cb.createQuery(Account.class);
         Root<Account> accountRoot = cq.from(Account.class);
-        cq.where(cb.equal(accountRoot.get("userId"), userId.value()));
+        cq.where(cb.equal(accountRoot.get("userId"), userId));
         List<Account> accounts = sessionFactory.getCurrentSession().createQuery(cq).getResultList();
         if (accounts.size() > 0) {
             return Optional.of(accounts.get(0));

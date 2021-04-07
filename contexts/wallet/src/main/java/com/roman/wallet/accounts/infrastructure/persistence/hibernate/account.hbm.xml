@@ -4,8 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.roman.wallet.accounts.domain.Account" table="users">
-        <composite-id name="id" class="com.roman.wallet.accounts.domain.AccountUserId" access="field">
+    <class name="com.roman.wallet.accounts.domain.Account" table="accounts">
+        <composite-id name="id" class="com.roman.wallet.accounts.domain.AccountId" access="field">
             <key-property column="id" name="value" length="36" access="field"/>
         </composite-id>
 

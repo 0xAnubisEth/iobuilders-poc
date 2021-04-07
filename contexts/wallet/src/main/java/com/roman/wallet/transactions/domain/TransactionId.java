@@ -8,6 +8,5 @@ public class TransactionId extends Identifier {
     }
 
     public TransactionId() {
-        super("");
     }
 }

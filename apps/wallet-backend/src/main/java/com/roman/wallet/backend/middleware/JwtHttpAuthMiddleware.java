@@ -35,7 +35,7 @@ public class JwtHttpAuthMiddleware implements Filter {
                 UserAuthResponse user = queryBus.ask(new SearchTokenQuery(id));
 
                 if (user.token().equals(authorizationHeader)) {
-                    request.setAttribute("authentication_user", user);
+                    request.setAttribute("authentication_user", user.userId());
                     chain.doFilter(request, response);
                 } else {
                     unauthorized(response);

@@ -8,6 +8,5 @@ public class AccountUserId extends Identifier {
     }
 
     public AccountUserId() {
-        super("");
     }
 }
