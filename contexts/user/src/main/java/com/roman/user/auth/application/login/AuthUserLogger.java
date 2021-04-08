@@ -1,13 +1,13 @@
 package com.roman.user.auth.application.login;
 
-import com.roman.shared.domain.bus.query.QueryBus;
-import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
+import com.roman.shared.domain.TokenEncoder;
 import com.roman.shared.domain.auth.AuthUser;
 import com.roman.shared.domain.auth.AuthUserRepository;
+import com.roman.shared.domain.bus.query.QueryBus;
+import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.roman.user.shared.domain.PasswordEncoder;
-import com.roman.shared.domain.TokenEncoder;
+import com.roman.user.users.application.UserResponse;
 import com.roman.user.users.application.search_by_username.SearchByUsernameQuery;
-import com.roman.user.users.application.search_by_username.UserResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,13 +24,19 @@ public class AuthUserLogger {
         this.tokenEncoder = tokenEncoder;
     }
 
-    public void login(String username, String password) throws QueryHandlerExecutionError, UnauthorizedException {
+    public void login(String username, String password) throws QueryHandlerExecutionError, UnauthorizedError {
+        UserResponse userResponse;
+
         // Get user by username
-        UserResponse userResponse = queryBus.ask(new SearchByUsernameQuery(username));
+        try {
+            userResponse = queryBus.ask(new SearchByUsernameQuery(username));
+        } catch (Exception e) {
+            throw new UnauthorizedError();
+        }
 
         // Match password
         if (!passwordEncoder.match(password, userResponse.password())) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedError();
         }
 
         // Generate token

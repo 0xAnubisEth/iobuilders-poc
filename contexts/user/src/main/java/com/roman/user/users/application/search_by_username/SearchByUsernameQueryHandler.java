@@ -1,6 +1,7 @@
 package com.roman.user.users.application.search_by_username;
 
 import com.roman.shared.domain.bus.query.QueryHandler;
+import com.roman.user.users.application.UserResponse;
 import com.roman.user.users.domain.User;
 import org.springframework.stereotype.Service;
 

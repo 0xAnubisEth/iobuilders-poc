@@ -1,11 +1,13 @@
 package com.roman.user.backend.controller;
 
 import com.roman.shared.domain.DomainError;
+import com.roman.shared.domain.InvalidArgumentError;
 import com.roman.shared.domain.bus.command.CommandBus;
 import com.roman.shared.domain.bus.command.CommandHandlerExecutionError;
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.infrastructure.spring.ApiController;
 import com.roman.user.users.application.create.CreateUserCommand;
+import com.roman.user.users.domain.UserAlreadyExistsError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,10 @@ public class CreateUserPostController extends ApiController {
 
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
+        return new HashMap<>() {{
+            put(UserAlreadyExistsError.class, HttpStatus.CONFLICT);
+            put(InvalidArgumentError.class, HttpStatus.BAD_REQUEST);
+        }};
     }
 
     @PostMapping("/users")

@@ -1,4 +1,4 @@
-package com.roman.user.users.application.search_by_username;
+package com.roman.user.users.application;
 
 import com.roman.shared.domain.bus.query.Response;
 

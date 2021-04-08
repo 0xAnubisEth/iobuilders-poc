@@ -1,13 +1,14 @@
 package com.roman.user.backend.controller;
 
+import com.roman.shared.application.auth.UserAuthResponse;
 import com.roman.shared.domain.DomainError;
 import com.roman.shared.domain.bus.command.CommandBus;
 import com.roman.shared.domain.bus.command.CommandHandlerExecutionError;
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.roman.shared.infrastructure.spring.ApiController;
-import com.roman.shared.application.auth.UserAuthResponse;
 import com.roman.user.auth.application.login.LoginAuthUserCommand;
+import com.roman.user.auth.application.login.UnauthorizedError;
 import com.roman.user.auth.application.search_by_username.SearchAuthUserByUsernameQuery;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,9 @@ public class LoginPostController extends ApiController {
 
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
+        return new HashMap<>() {{
+            put(UnauthorizedError.class, HttpStatus.UNAUTHORIZED);
+        }};
     }
 
     @PostMapping("/login")

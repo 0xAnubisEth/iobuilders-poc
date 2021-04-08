@@ -1,7 +1,7 @@
 package com.roman.user.users.application.search_by_username;
 
 import com.roman.user.users.domain.User;
-import com.roman.user.users.domain.UserNotFoundException;
+import com.roman.user.users.domain.UserNotFoundError;
 import com.roman.user.users.domain.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class UserFinderByUsername {
         if (optional.isPresent()) {
             return optional.get();
         }
-        throw new UserNotFoundException(username);
+        throw new UserNotFoundError(username);
     }
 
 }

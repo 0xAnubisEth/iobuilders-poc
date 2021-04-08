@@ -1,6 +1,7 @@
 package com.roman.user.users.application.create;
 
 import com.roman.shared.domain.bus.command.CommandHandler;
+import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +13,7 @@ public class CreateUserCommandHandler implements CommandHandler<CreateUserComman
     }
 
     @Override
-    public void handle(CreateUserCommand command) {
+    public void handle(CreateUserCommand command) throws QueryHandlerExecutionError {
         this.creator.create(command.id(), command.username(), command.password(), command.name(), command.lastname());
     }
 }
