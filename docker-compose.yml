@@ -23,7 +23,7 @@ services:
       - 8090:15672
     environment:
       - RABBITMQ_DEFAULT_USER=iobuilders
-      - RABBITMQ_DEFAULT_PASS=i0build3rsç
+      - RABBITMQ_DEFAULT_PASS=i0build3rs
 
   redis:
     image: redis:latest

@@ -44,7 +44,7 @@ public class RabbitMqEventBusConfiguration {
     }
 
     @Bean
-    public Declarables declaration() {
+    public Declarables declarables() {
         String retryExchangeName = RabbitMqExchangeNameFormatter.retry(exchangeName);
         String deadLetterExchangeName = RabbitMqExchangeNameFormatter.deadLetter(exchangeName);
 
