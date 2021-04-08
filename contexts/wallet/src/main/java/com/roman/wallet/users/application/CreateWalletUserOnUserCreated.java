@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @DomainEventSubscriber({UserCreatedDomainEvent.class})
-public final class CreateWalletUserOnUserCreate {
+public final class CreateWalletUserOnUserCreated {
     private final WalletUserCreator creator;
 
-    public CreateWalletUserOnUserCreate(WalletUserCreator creator) {
+    public CreateWalletUserOnUserCreated(WalletUserCreator creator) {
         this.creator = creator;
     }
 
