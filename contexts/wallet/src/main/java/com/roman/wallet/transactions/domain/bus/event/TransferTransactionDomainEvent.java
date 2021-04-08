@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class TransferTransactionDomainEvent extends DomainEvent {
-    private final String id;
     private final String origin;
     private final String destination;
     private final Float quantity;
@@ -14,7 +13,6 @@ public class TransferTransactionDomainEvent extends DomainEvent {
     private final String concept;
 
     public TransferTransactionDomainEvent() {
-        this.id = null;
         this.origin = null;
         this.destination = null;
         this.quantity = null;
@@ -22,21 +20,9 @@ public class TransferTransactionDomainEvent extends DomainEvent {
         this.concept = null;
     }
 
-    public TransferTransactionDomainEvent(String id, String origin, String destination, Float quantity, String type, String concept) {
-        super(null);
-
-        this.id = id;
-        this.origin = origin;
-        this.destination = destination;
-        this.quantity = quantity;
-        this.type = type;
-        this.concept = concept;
-    }
-
-    public TransferTransactionDomainEvent(String aggregateId, String eventId, String occurredOn, String id, String origin, String destination, Float quantity, String type, String concept) {
+    public TransferTransactionDomainEvent(String aggregateId, String eventId, String occurredOn, String origin, String destination, Float quantity, String type, String concept) {
         super(aggregateId, eventId, occurredOn);
 
-        this.id = id;
         this.origin = origin;
         this.destination = destination;
         this.quantity = quantity;
@@ -44,19 +30,14 @@ public class TransferTransactionDomainEvent extends DomainEvent {
         this.concept = concept;
     }
 
-    public TransferTransactionDomainEvent(String aggregateId, String id, String origin, String destination, Float quantity, String type, String concept) {
+    public TransferTransactionDomainEvent(String aggregateId, String origin, String destination, Float quantity, String type, String concept) {
         super(aggregateId);
 
-        this.id = id;
         this.origin = origin;
         this.destination = destination;
         this.quantity = quantity;
         this.type = type;
         this.concept = concept;
-    }
-
-    public String id() {
-        return id;
     }
 
     public String origin() {
@@ -87,7 +68,6 @@ public class TransferTransactionDomainEvent extends DomainEvent {
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{
-            put("id", id);
             put("origin", origin);
             put("destination", destination);
             put("quantity", quantity);
@@ -102,10 +82,9 @@ public class TransferTransactionDomainEvent extends DomainEvent {
                 aggregateId,
                 eventId,
                 occurredOn,
-                (String) body.get("id"),
                 (String) body.get("origin"),
                 (String) body.get("destination"),
-                (Float) body.get("quantity"),
+                Float.parseFloat(body.get("quantity").toString()),
                 (String) body.get("type"),
                 (String) body.get("concept")
         );

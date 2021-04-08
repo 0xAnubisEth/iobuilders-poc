@@ -5,6 +5,7 @@ import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.roman.wallet.accounts.application.AccountResponse;
 import com.roman.wallet.accounts.application.search_by_user.SearchAccountByUserQuery;
+import com.roman.wallet.transactions.domain.AccountHasNotBalance;
 import com.roman.wallet.transactions.domain.Transaction;
 import com.roman.wallet.transactions.domain.TransactionRepository;
 import com.roman.wallet.transactions.domain.bus.event.WithdrawTransactionDomainEvent;
@@ -26,6 +27,10 @@ public final class TransactionWithdraw {
     public void withdraw(String id, String userId, Float quantity, String concept) throws QueryHandlerExecutionError {
         // Search origin account
         AccountResponse response = queryBus.ask(new SearchAccountByUserQuery(userId));
+
+        if (response.balance() < quantity) {
+            throw new AccountHasNotBalance(quantity);
+        }
 
         // Save transaction
         Transaction transaction = Transaction.create(id, response.id(), response.id(), -quantity, TRANSACTION_TYPE, concept);
