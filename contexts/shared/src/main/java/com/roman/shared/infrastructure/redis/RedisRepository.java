@@ -5,6 +5,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.util.Date;
+
 public abstract class RedisRepository<T> {
 
     private final RedisConnectionFactory factory;
@@ -26,7 +28,16 @@ public abstract class RedisRepository<T> {
     }
 
     public void save(String id, T impl) {
-        redisTemplate().opsForValue().set(id, impl);
+        RedisTemplate<String, T> template = redisTemplate();
+        template.opsForValue().set(id, impl);
+    }
+
+    public void save(String id, T impl, Date expiration) {
+        RedisTemplate<String, T> template = redisTemplate();
+        template.opsForValue().set(id, impl);
+        if (expiration != null) {
+            template.expireAt(id, expiration);
+        }
     }
 
     public T findById(String id) {
