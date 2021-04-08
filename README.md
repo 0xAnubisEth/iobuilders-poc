@@ -24,6 +24,7 @@ transferring money, withdrawing money and obtaining all account movements.
 
 * JDK 11
 * Docker
+* Maven
 
 <a name="build"></a>
 
@@ -38,6 +39,8 @@ Run in terminal: `docker-compose up --build`
 <a name="user-backend"></a>
 
 ### User backend 👩‍💻
+
+The user-backend microservice is raised on port 8080 by default.
 
 <a name="create-user"></a>
 
@@ -86,6 +89,8 @@ Run in terminal: `docker-compose up --build`
 <a name="wallet-backend"></a>
 
 ### Wallet backend 💸
+
+The wallet-backend microservice is raised on port 8081 by default.
 
 <a name="deposit-money"></a>
 
