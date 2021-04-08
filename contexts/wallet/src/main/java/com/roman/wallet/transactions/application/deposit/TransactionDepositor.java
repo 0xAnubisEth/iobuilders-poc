@@ -24,14 +24,19 @@ public final class TransactionDepositor {
     }
 
     public void deposit(String id, String concept, Float quantity, String userId) throws QueryHandlerExecutionError {
+        // Search origin account
         AccountResponse response = queryBus.ask(new SearchAccountByUserQuery(userId));
 
+        // Create transaction
         Transaction transaction = Transaction.create(id, response.id(), response.id(), quantity, TRANSACTION_TYPE, concept);
 
+        // Record event
         transaction.recordEvent(new DepositTransactionDomainEvent(id, response.id(), response.id(), quantity, TRANSACTION_TYPE, concept));
 
+        // Save in database
         repository.save(transaction);
 
+        // Publish events
         eventBus.publish(transaction.pullDomainEvents());
     }
 }

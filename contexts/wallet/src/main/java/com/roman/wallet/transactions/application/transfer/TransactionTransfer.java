@@ -9,7 +9,8 @@ import com.roman.wallet.accounts.application.AccountResponse;
 import com.roman.wallet.accounts.application.search_by_id.SearchAccountByIdQuery;
 import com.roman.wallet.accounts.application.search_by_user.SearchAccountByUserQuery;
 import com.roman.wallet.transactions.application.withdraw.WithdrawTransactionCommand;
-import com.roman.wallet.transactions.domain.AccountHasNotBalance;
+import com.roman.wallet.transactions.domain.AccountHasNotBalanceError;
+import com.roman.wallet.transactions.domain.DestinationAccountNotFound;
 import com.roman.wallet.transactions.domain.Transaction;
 import com.roman.wallet.transactions.domain.TransactionRepository;
 import com.roman.wallet.transactions.domain.bus.event.TransferTransactionDomainEvent;
@@ -37,11 +38,16 @@ public final class TransactionTransfer {
         AccountResponse originResponse = queryBus.ask(new SearchAccountByUserQuery(userId));
 
         if (originResponse.balance() < quantity) {
-            throw new AccountHasNotBalance(quantity);
+            throw new AccountHasNotBalanceError(quantity);
         }
 
         // Search destination account
-        AccountResponse destinationResponse = queryBus.ask(new SearchAccountByIdQuery(destination));
+        AccountResponse destinationResponse;
+        try {
+             destinationResponse = queryBus.ask(new SearchAccountByIdQuery(destination));
+        } catch (Exception ignored) {
+            throw new DestinationAccountNotFound(destination);
+        }
 
         // Save destination transaction
         Transaction destinationTransaction = Transaction.create(id, originResponse.id(), destinationResponse.id(), quantity, TRANSACTION_TYPE, concept);

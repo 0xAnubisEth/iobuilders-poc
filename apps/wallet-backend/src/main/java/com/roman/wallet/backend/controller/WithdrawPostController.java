@@ -1,16 +1,17 @@
 package com.roman.wallet.backend.controller;
 
 import com.roman.shared.domain.DomainError;
+import com.roman.shared.domain.InvalidArgumentError;
 import com.roman.shared.domain.bus.command.CommandBus;
 import com.roman.shared.domain.bus.command.CommandHandlerExecutionError;
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.infrastructure.spring.ApiController;
 import com.roman.wallet.transactions.application.withdraw.WithdrawTransactionCommand;
+import com.roman.wallet.transactions.domain.AccountHasNotBalanceError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/wallet")
 public class WithdrawPostController extends ApiController {
 
     public WithdrawPostController(QueryBus queryBus, CommandBus commandBus) {
@@ -27,7 +27,10 @@ public class WithdrawPostController extends ApiController {
 
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
+        return new HashMap<>() {{
+            put(InvalidArgumentError.class, HttpStatus.BAD_REQUEST);
+            put(AccountHasNotBalanceError.class, HttpStatus.CONFLICT);
+        }};
     }
 
     @PostMapping("/withdraw")

@@ -5,7 +5,7 @@ import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.roman.wallet.accounts.application.AccountResponse;
 import com.roman.wallet.accounts.application.search_by_user.SearchAccountByUserQuery;
-import com.roman.wallet.transactions.domain.AccountHasNotBalance;
+import com.roman.wallet.transactions.domain.AccountHasNotBalanceError;
 import com.roman.wallet.transactions.domain.Transaction;
 import com.roman.wallet.transactions.domain.TransactionRepository;
 import com.roman.wallet.transactions.domain.bus.event.WithdrawTransactionDomainEvent;
@@ -29,7 +29,7 @@ public final class TransactionWithdraw {
         AccountResponse response = queryBus.ask(new SearchAccountByUserQuery(userId));
 
         if (response.balance() < quantity) {
-            throw new AccountHasNotBalance(quantity);
+            throw new AccountHasNotBalanceError(quantity);
         }
 
         // Save transaction

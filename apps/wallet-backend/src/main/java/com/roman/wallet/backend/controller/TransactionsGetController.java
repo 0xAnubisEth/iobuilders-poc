@@ -1,6 +1,7 @@
 package com.roman.wallet.backend.controller;
 
 import com.roman.shared.domain.DomainError;
+import com.roman.shared.domain.InvalidArgumentError;
 import com.roman.shared.domain.bus.command.CommandBus;
 import com.roman.shared.domain.bus.query.QueryBus;
 import com.roman.shared.domain.bus.query.QueryHandlerExecutionError;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/wallet")
+@RequestMapping("/transactions")
 public class TransactionsGetController extends ApiController {
 
     public TransactionsGetController(QueryBus queryBus, CommandBus commandBus) {
@@ -28,7 +29,9 @@ public class TransactionsGetController extends ApiController {
 
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
+        return new HashMap<>() {{
+            put(InvalidArgumentError.class, HttpStatus.BAD_REQUEST);
+        }};
     }
 
     @GetMapping("/all")
